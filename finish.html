@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Complete - Thank You</title>
+    <script src="jatos.js"></script>
+    
+    <style>
+        /* Import Google Fonts */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+        /* Variables */
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #ff6b6b;
+            --success-color: #4caf50;
+            --warning-color: #ffa726;
+            --background-color: #f5f7fa;
+            --text-color: #2c3e50;
+            --card-background: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --gradient-start: #6c63ff;
+            --gradient-end: #4834df;
+        }
+
+        /* General styles */
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf4 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 20px;
+            padding: 40px;
+            background: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            position: relative;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .thank-you-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--success-color), #6fd66f);
+            border-radius: 50%;
+            margin: 0 auto 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .description {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 30px;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .feedback-section {
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .feedback-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .question-item {
+            margin-bottom: 35px;
+        }
+
+        .question-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .scale-note {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .rating-scale input[type="radio"] {
+            display: none;
+        }
+
+        .rating-scale label {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .rating-scale label:hover {
+            border-color: var(--primary-color);
+            background: rgba(108, 99, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .rating-scale input[type="radio"]:checked + label {
+            background: linear-gradient(135deg, var(--primary-color), var(--gradient-end));
+            border-color: var(--primary-color);
+            color: white;
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
+        }
+
+        .yes-no-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .yes-no-group input[type="radio"] {
+            display: none;
+        }
+
+        .yes-no-label {
+            display: inline-block;
+            padding: 10px 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .yes-no-label:hover {
+            border-color: var(--primary-color);
+            background: rgba(108, 99, 255, 0.1);
+        }
+
+        .yes-no-group input[type="radio"]:checked + .yes-no-label {
+            background: linear-gradient(135deg, var(--primary-color), var(--gradient-end));
+            border-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+        }
+
+        .sub-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .tech-text-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: "Poppins", sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .tech-text-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 12px rgba(108, 99, 255, 0.2);
+        }
+
+        .tech-text-input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .comments-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+            line-height: 1.4;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+
+        .comments-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(108, 99, 255, 0.2);
+        }
+
+        .comments-textarea::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .finish-btn {
+            background: linear-gradient(135deg, var(--success-color), #6fd66f);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .finish-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .finish-btn:active {
+            transform: translateY(0);
+        }
+
+        .bonus-info {
+            background: rgba(108, 99, 255, 0.1);
+            border: 2px solid rgba(108, 99, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .bonus-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .bonus-text {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* Animation for completion */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        /* Loading spinner for when submitting */
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .finish-btn.loading .loading-spinner {
+            display: inline-block;
+        }
+
+        .finish-btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .description {
+                font-size: 18px;
+            }
+
+            .question-label {
+                font-size: 16px;
+            }
+
+            .rating-scale {
+                gap: 10px;
+            }
+
+            .rating-scale label {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 16px;
+            }
+
+            .finish-btn {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Thank you icon -->
+        <div class="thank-you-icon">
+            ✓
+        </div>
+
+        <!-- Main heading -->
+        <h1>Thank you for completing the study!</h1>
+
+        <!-- Bonus information (will be populated by JavaScript) -->
+        <div class="bonus-info" id="bonus-info" style="display: none;">
+            <div class="bonus-amount" id="bonus-amount"></div>
+            <div class="bonus-text">Your performance bonus will be added to your payment</div>
+        </div>
+
+        <!-- Description -->
+        <div class="description">
+            Before we redirect you back to Prolific for your payment to be processed, we would appreciate your feedback about the experiment.
+            <br><br>
+            Please take a moment to answer the questions below:
+        </div>
+
+        <!-- Feedback section -->
+        <div class="feedback-section">
+            <!-- Question 1: Interest -->
+            <div class="question-item">
+                <label class="question-label">1. How interesting did you find the study?</label>
+                <div class="scale-note">(1 = Not interesting at all, 7 = Very interesting)</div>
+                <div class="rating-scale">
+                    <input type="radio" name="interest" id="interest-1" value="1">
+                    <label for="interest-1">1</label>
+                    <input type="radio" name="interest" id="interest-2" value="2">
+                    <label for="interest-2">2</label>
+                    <input type="radio" name="interest" id="interest-3" value="3">
+                    <label for="interest-3">3</label>
+                    <input type="radio" name="interest" id="interest-4" value="4">
+                    <label for="interest-4">4</label>
+                    <input type="radio" name="interest" id="interest-5" value="5">
+                    <label for="interest-5">5</label>
+                    <input type="radio" name="interest" id="interest-6" value="6">
+                    <label for="interest-6">6</label>
+                    <input type="radio" name="interest" id="interest-7" value="7">
+                    <label for="interest-7">7</label>
+                </div>
+            </div>
+
+            <!-- Question 2: Difficulty -->
+            <div class="question-item">
+                <label class="question-label">2. How difficult was the study for you?</label>
+                <div class="scale-note">(1 = Not difficult at all, 7 = Very difficult)</div>
+                <div class="rating-scale">
+                    <input type="radio" name="difficulty" id="difficulty-1" value="1">
+                    <label for="difficulty-1">1</label>
+                    <input type="radio" name="difficulty" id="difficulty-2" value="2">
+                    <label for="difficulty-2">2</label>
+                    <input type="radio" name="difficulty" id="difficulty-3" value="3">
+                    <label for="difficulty-3">3</label>
+                    <input type="radio" name="difficulty" id="difficulty-4" value="4">
+                    <label for="difficulty-4">4</label>
+                    <input type="radio" name="difficulty" id="difficulty-5" value="5">
+                    <label for="difficulty-5">5</label>
+                    <input type="radio" name="difficulty" id="difficulty-6" value="6">
+                    <label for="difficulty-6">6</label>
+                    <input type="radio" name="difficulty" id="difficulty-7" value="7">
+                    <label for="difficulty-7">7</label>
+                </div>
+            </div>
+
+            <!-- Question 3: Motivation -->
+            <div class="question-item">
+                <label class="question-label">3. How motivated did you feel while completing the study?</label>
+                <div class="scale-note">(1 = Not motivated at all, 7 = Very motivated)</div>
+                <div class="rating-scale">
+                    <input type="radio" name="motivation" id="motivation-1" value="1">
+                    <label for="motivation-1">1</label>
+                    <input type="radio" name="motivation" id="motivation-2" value="2">
+                    <label for="motivation-2">2</label>
+                    <input type="radio" name="motivation" id="motivation-3" value="3">
+                    <label for="motivation-3">3</label>
+                    <input type="radio" name="motivation" id="motivation-4" value="4">
+                    <label for="motivation-4">4</label>
+                    <input type="radio" name="motivation" id="motivation-5" value="5">
+                    <label for="motivation-5">5</label>
+                    <input type="radio" name="motivation" id="motivation-6" value="6">
+                    <label for="motivation-6">6</label>
+                    <input type="radio" name="motivation" id="motivation-7" value="7">
+                    <label for="motivation-7">7</label>
+                </div>
+            </div>
+
+            <!-- Question 4: Technical Issues -->
+            <div class="question-item">
+                <label class="question-label">4. Did you experience any technical issues during the study?</label>
+                <div class="yes-no-group">
+                    <input type="radio" name="technical_issues" id="tech-yes" value="yes">
+                    <label for="tech-yes" class="yes-no-label">Yes</label>
+                    <span style="margin: 0 15px;">/</span>
+                    <input type="radio" name="technical_issues" id="tech-no" value="no">
+                    <label for="tech-no" class="yes-no-label">No</label>
+                </div>
+                <div class="tech-description" id="tech-description" style="display: none; margin-top: 15px;">
+                    <label for="tech-description-text" class="sub-label">If yes, please describe:</label>
+                    <input type="text" id="tech-description-text" class="tech-text-input" placeholder="Describe the technical issues you encountered">
+                </div>
+            </div>
+
+            <!-- Question 5: Additional Comments -->
+            <div class="question-item">
+                <label class="question-label" for="additional_comments">
+                    Additional Comments (Optional):
+                </label>
+                <div class="sub-label">Please share any thoughts about the experience, any issues you encountered, or general comments about the study.</div>
+                <textarea 
+                    id="additional_comments" 
+                    class="comments-textarea"
+                    placeholder="Your additional comments..."
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- Finish button -->
+        <button class="finish-btn" id="finish-btn" onclick="atFinish()">
+            <span id="btn-text">Complete Study</span>
+            <div class="loading-spinner"></div>
+        </button>
+    </div>
+
+    <script>
+        // Display bonus information if available and setup feedback handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof jatos !== 'undefined' && jatos.studySessionData.final_bonus) {
+                const bonusInfo = document.getElementById('bonus-info');
+                const bonusAmount = document.getElementById('bonus-amount');
+                bonusAmount.textContent = `Bonus: £${jatos.studySessionData.final_bonus}`;
+                bonusInfo.style.display = 'block';
+            }
+
+            // Show/hide technical issues description field
+            const techYes = document.getElementById('tech-yes');
+            const techNo = document.getElementById('tech-no');
+            const techDescription = document.getElementById('tech-description');
+            const techDescriptionText = document.getElementById('tech-description-text');
+            
+            if (techYes) {
+                techYes.addEventListener('change', function() {
+                    if (this.checked && techDescription) {
+                        techDescription.style.display = 'block';
+                    }
+                });
+            }
+            
+            if (techNo) {
+                techNo.addEventListener('change', function() {
+                    if (this.checked && techDescription) {
+                        techDescription.style.display = 'none';
+                        if (techDescriptionText) {
+                            techDescriptionText.value = '';
+                        }
+                    }
+                });
+            }
+
+            // Auto-resize textarea
+            const additionalComments = document.getElementById('additional_comments');
+            if (additionalComments) {
+                additionalComments.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = Math.max(this.scrollHeight, 100) + 'px';
+                });
+            }
+        });
+
+        // Enhanced finish function with loading state
+        function atFinish() {
+            const button = document.getElementById('finish-btn');
+            const btnText = document.getElementById('btn-text');
+            
+            // Show loading state
+            button.classList.add('loading');
+            btnText.textContent = 'Processing...';
+            
+            // Collect all feedback data
+            const interest = document.querySelector('input[name="interest"]:checked')?.value || null;
+            const difficulty = document.querySelector('input[name="difficulty"]:checked')?.value || null;
+            const motivation = document.querySelector('input[name="motivation"]:checked')?.value || null;
+            const technicalIssues = document.querySelector('input[name="technical_issues"]:checked')?.value || null;
+            const technicalDescription = technicalIssues === 'yes' ? document.getElementById('tech-description-text').value : null;
+            const additionalComments = document.getElementById('additional_comments').value || null;
+            
+            const feedbackObject = {
+                feedback_interest: interest,
+                feedback_difficulty: difficulty,
+                feedback_motivation: motivation,
+                feedback_technical_issues: technicalIssues,
+                feedback_technical_description: technicalDescription,
+                feedback_additional_comments: additionalComments,
+                timestamp: new Date().toISOString()
+            };
+            const feedbackJsonString = "[" + JSON.stringify(feedbackObject) + "]";
+
+            if (typeof jatos !== 'undefined') {
+
+                jatos.appendResultData(feedbackJsonString);
+
+               
+                const n_attention_failed_so_far = jatos.studySessionData.n_attention_failed_so_far || 0;
+                const n_total_attention_checks = jatos.studySessionData.n_total_attention_checks || 0;
+                const totalPoints = jatos.studySessionData.totalPoints || 0;
+                
+                // Calculate proportion of failed attention checks
+                const proportion_attention_failed = n_total_attention_checks > 0 
+                    ? (n_attention_failed_so_far / n_total_attention_checks) 
+                    : 0;
+                
+                // Determine bonus eligibility: >= 500 points AND < 2 failed attention checks
+                const qualifiesForBonus = totalPoints >= 500 && n_attention_failed_so_far < 2;
+                
+                let end_message = "Study completed successfully - Points: " + totalPoints + ", Failed attention checks: " + (proportion_attention_failed * 100).toFixed(1) + "%";
+                if (qualifiesForBonus) {
+                    end_message += ", Bonus: £3";
+                } else {
+                    end_message += ", Bonus: £0";
+                }
+                
+                jatos.endStudy(true, end_message);
+            } else {
+                // For local testing
+                setTimeout(() => {
+                    alert("Study completed! Feedback collected: " + JSON.stringify(feedbackObject, null, 2));
+                    button.classList.remove('loading');
+                    btnText.textContent = 'Complete Study';
+                }, 1000);
+            }
+        }
+
+    </script>
+</body>
+</html>
